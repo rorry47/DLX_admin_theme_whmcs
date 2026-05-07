@@ -1,0 +1,1623 @@
+/*
+ * nkotov WHMCS Admin Theme — main stylesheet
+ * Generated from the design prototype. Do not edit minified version.
+ * Variables in :root, theme switching via [data-theme="dark"|"light"] on <body>.
+ */
+:root {
+    --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 4px;
+    --radius-sm: 3px;
+
+    --accent: #2e7cf6;
+    --accent-ink: #ffffff;
+
+    --ok: #4f9a6a;
+    --warn: #c9a14b;
+    --err: #c2563a;
+    --info: #5a7fa6;
+    --pink: #c25b8c;
+  }
+  :root {
+    --bg: #0e0e0e;
+    --bg-1: #161616;
+    --bg-2: #1c1c1c;
+    --bg-3: #232323;
+    --topbar-bg: #1a1a1a;
+    --topbar-ink: #ededed;
+    --line: #262626;
+    --line-2: #303030;
+    --ink: #ededed;
+    --ink-1: #c8c8c8;
+    --ink-2: #8a8a8a;
+    --ink-3: #5a5a5a;
+    --hover: rgba(255,255,255,.04);
+    --selected: rgba(255,255,255,.06);
+  }
+  [data-theme="dark"] {
+    --bg: #0e0e0e;
+    --bg-1: #161616;
+    --bg-2: #1c1c1c;
+    --bg-3: #232323;
+    --topbar-bg: #1a1a1a;
+    --topbar-ink: #ededed;
+    --line: #262626;
+    --line-2: #303030;
+    --ink: #ededed;
+    --ink-1: #c8c8c8;
+    --ink-2: #8a8a8a;
+    --ink-3: #5a5a5a;
+    --hover: rgba(255,255,255,.04);
+    --selected: rgba(255,255,255,.06);
+  }
+  [data-theme="light"] {
+    --bg: #f6f5f1;
+    --bg-1: #ffffff;
+    --bg-2: #f0eee9;
+    --bg-3: #e7e5de;
+    --topbar-bg: #1f1f1f;
+    --topbar-ink: #ededed;
+    --line: #e3e0d8;
+    --line-2: #cfccc3;
+    --ink: #1a1a1a;
+    --ink-1: #3a3a3a;
+    --ink-2: #6e6e6e;
+    --ink-3: #9a9a9a;
+    --hover: rgba(0,0,0,.035);
+    --selected: rgba(0,0,0,.05);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; border: 2px solid var(--bg); }
+
+  /* ============ TOPBAR (like WHMCS) ============ */
+  .topbar {
+    height: 48px;
+    background: var(--topbar-bg);
+    color: var(--topbar-ink);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid #000;
+  }
+  .topbar .brand {
+    display: flex; align-items: center; gap: 6px;
+    padding: 0 14px 0 4px;
+    font-size: 17px; font-weight: bold;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .topbar .brand .accent { color: var(--accent); }
+  .topbar .brand .ver { font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,.5); margin-left: 4px; }
+  .topbar .nav {
+    display: flex; align-items: center; gap: 0;
+  }
+  .topbar .nav-item {
+    padding: 0 14px;
+    height: 48px;
+    display: inline-flex; align-items: center; gap: 5px;
+    color: rgba(255,255,255,.85);
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .topbar .nav-item:hover { color: #fff; background: rgba(255,255,255,.04); }
+  .topbar .nav-item.active { color: #fff; border-bottom-color: var(--accent); background: rgba(255,255,255,.04); }
+  .topbar .nav-item .caret { font-size: 9px; opacity: .7; }
+  .topbar .nav-item.plus { font-size: 18px; padding: 0 12px; }
+  .topbar .right { margin-left: auto; display: flex; align-items: center; gap: 2px; }
+  .topbar .right button {
+    background: transparent; border: 0; color: rgba(255,255,255,.75);
+    width: 36px; height: 36px; border-radius: var(--radius-sm);
+    display: inline-flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .topbar .right button:hover { background: rgba(255,255,255,.07); color: #fff; }
+  .topbar .right button .dot { position: absolute; top: 8px; right: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .topbar .right .av {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: bold; font-size: 11px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-left: 6px;
+  }
+
+  /* ============ APP LAYOUT ============ */
+.app {
+    display: grid;
+    grid-template-columns: 64px 240px 1fr;
+    min-height: calc(100vh - 48px);
+    transition: grid-template-columns 0.3s ease-in-out; 
+}
+
+body.side-min .app {
+    grid-template-columns: 64px 1fr !important;
+}
+  /* PRIMARY ICON RAIL (left) */
+  .rail {
+    background: var(--topbar-bg);
+    border-right: 1px solid #000;
+    display: flex; flex-direction: column; align-items: stretch;
+    padding: 8px 0;
+    gap: 2px;
+  }
+  .rail .ri {
+    height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.7);
+    cursor: pointer; position: relative;
+    border-left: 3px solid transparent;
+    outline: none !important;
+  }
+  .rail .ri svg { width: 20px; height: 20px; }
+  .rail .ri:hover { color: #fff; background: rgba(255,255,255,.05); outline: none !important;}
+  .rail .ri.active { color: #fff; border-left-color: var(--accent); background: rgba(255,255,255,.07); }
+  .rail .ri .lbl {
+    position: absolute; left: 56px; top: 50%; transform: translateY(-50%);
+    background: #000; color: #fff; padding: 4px 9px; border-radius: 3px;
+    font-size: 11px; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity .15s;
+    z-index: 200; border: 1px solid var(--line-2);
+  }
+  .rail .ri:hover .lbl { opacity: 1; outline: none !important;}
+  .rail .sep { height: 1px; background: rgba(255,255,255,.07); margin: 8px 12px; }
+  .rail .ri a:focus {outline: none !important;}
+  /* SIDEBAR */
+  .side {
+    border-right: 1px solid var(--line);
+    background: var(--bg-1);
+    padding: 0;
+    font-size: 13px;
+  }
+  .side-block { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .side-block h4 {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 7px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .side-block h4 .ico { width: 13px; height: 13px; color: var(--ink-2); }
+  .side a.shortcut {
+    display: flex; align-items: center; gap: 7px;
+    padding: 4px 0;
+    color: var(--accent);
+    font-size: 12.5px;
+    text-decoration: none;
+  }
+  .side a.shortcut:hover { text-decoration: underline; }
+  .side a.shortcut::before {
+    content: ""; width: 13px; height: 13px;
+    background: var(--ink-3);
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><polyline points='9 18 15 12 9 6'/></svg>") center / contain no-repeat;
+  }
+  .side .info-list { font-size: 12px; color: var(--ink-1); line-height: 1.7; }
+  .side .info-list b { color: var(--ink); font-weight: normal; }
+  .side .field-stack { display: flex; flex-direction: column; gap: 8px; }
+  .side select, .side input[type="text"] {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    font: inherit; font-size: 12.5px;
+    outline: none;
+  }
+  .side .row-search { display: flex; gap: 6px; }
+  .side .row-search input { flex: 1; }
+  .side .row-search button {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 0 10px; border-radius: var(--radius-sm); color: var(--ink);
+    font-size: 12px;
+  }
+  .staff-online .who { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 12.5px; }
+  .staff-online .who .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .minimise {
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    padding: 7px 0;
+    font-size: 11.5px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ============ MAIN ============ */
+  .main { min-width: 0; background: var(--bg); }
+  .page { padding: 22px 28px 60px; }
+  .page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+  .page-head h1 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .page-head .sub { color: var(--ink-2); margin-top: 4px; font-size: 13px; }
+  .page-head .actions { display: flex; gap: 8px; align-items: center; }
+
+  /* ============ DASHBOARD KPI BLOCKS (re-imagined WHMCS color cards) ============ */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card .icn {
+    width: 38px; height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .kpi-card .icn svg { width: 18px; height: 18px; }
+  .kpi-card.green .icn { background: rgba(79,154,106,.14); color: var(--ok); }
+  .kpi-card.pink .icn { background: rgba(194,91,140,.14); color: var(--pink); }
+  .kpi-card.amber .icn { background: rgba(201,161,75,.14); color: var(--warn); }
+  .kpi-card.teal .icn { background: rgba(90,127,166,.14); color: var(--info); }
+  .kpi-card .v { font-size: 26px; font-weight: bold; color: var(--ink); line-height: 1; letter-spacing: -0.02em; }
+  .kpi-card .l { color: var(--ink-2); font-size: 11.5px; margin-top: 4px; }
+  .kpi-card .accent-bar {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  }
+  .kpi-card.green .accent-bar { background: var(--ok); }
+  .kpi-card.pink .accent-bar { background: var(--pink); }
+  .kpi-card.amber .accent-bar { background: var(--warn); }
+  .kpi-card.teal .accent-bar { background: var(--info); }
+
+  /* ============ PANELS (System Overview, Activity, etc.) ============ */
+  .panel {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+  }
+  .panel-head {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .panel-head h3 { margin: 0; font-size: 14px; font-weight: bold; color: var(--accent); }
+  .panel-head .ctrls { display: flex; gap: 4px; align-items: center; color: var(--ink-3); }
+  .panel-head .ctrls button { background: transparent; border: 0; color: var(--ink-3); width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
+  .panel-head .ctrls button:hover { color: var(--ink-1); }
+  .panel-body { padding: 14px 16px; }
+  .panel-foot { padding: 10px 14px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--ink-2);}
+
+  /* tabs (Today / 30d / 1y) like WHMCS */
+  .pill-tabs {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .pill-tabs button {
+    background: transparent; border: 0; color: var(--ink-2);
+    padding: 5px 12px; font-size: 12px;
+    border-right: 1px solid var(--line);
+  }
+  .pill-tabs button:last-child { border-right: 0; }
+  .pill-tabs button.on { background: var(--bg-2); color: var(--ink); }
+
+  /* ============ DASHBOARD GRID ============ */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 14px;
+  }
+
+  /* billing mini */
+  .billing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .billing-cell {
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .billing-cell:nth-child(2n) { border-right: 0; }
+  .billing-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .billing-cell .v { font-size: 22px; font-weight: bold; letter-spacing: -0.01em; }
+  .billing-cell .l { color: var(--ink-2); font-size: 11.5px; margin-top: 2px; }
+  .billing-cell.c1 .v { color: var(--ok); }
+  .billing-cell.c2 .v { color: var(--warn); }
+  .billing-cell.c3 .v { color: var(--pink); }
+  .billing-cell.c4 .v { color: var(--ink); }
+
+  /* automation overview circles */
+  .auto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .auto-cell {
+    padding: 18px 14px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .auto-cell:nth-child(2n) { border-right: 0; }
+  .auto-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .auto-cell .l { font-size: 11.5px; color: var(--ink-2); margin-bottom: 6px; }
+  .auto-cell .v { font-size: 22px; font-weight: bold; }
+  .auto-cell .bar { height: 2px; margin: 8px auto 0; width: 60%; border-radius: 1px; }
+  .auto-cell.c1 .v { color: var(--info); } .auto-cell.c1 .bar { background: var(--info); }
+  .auto-cell.c2 .v { color: var(--warn); } .auto-cell.c2 .bar { background: var(--warn); }
+  .auto-cell.c3 .v { color: var(--ok); }   .auto-cell.c3 .bar { background: var(--ok); }
+  .auto-cell.c4 .v { color: var(--pink); } .auto-cell.c4 .bar { background: var(--pink); }
+  .auto-foot {
+    padding: 10px 14px; font-size: 11.5px; color: var(--ink-2);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .auto-foot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+
+  /* activity */
+  .activity-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  .activity-row:last-child { border-bottom: 0; }
+  .activity-row .who { font-weight: bold; color: var(--ink); font-size: 12px; margin-bottom: 2px; }
+  .activity-row .msg { color: var(--ink-1); }
+  .activity-row .when { color: var(--ink-3); font-size: 11px; }
+
+  /* marketconnect */
+  .mc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0; }
+  .mc-cell { padding: 18px 12px; text-align: center; border-right: 1px solid var(--line); }
+  .mc-cell:last-child { border-right: 0; }
+  .mc-cell .logo {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--bg-2); border: 1px solid var(--line);
+    margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 11px; color: var(--ink-2);
+  }
+  .mc-cell .nm { font-size: 12px; color: var(--ink); margin-bottom: 2px; }
+  .mc-cell .by { font-size: 10.5px; color: var(--ink-3); margin-bottom: 8px; }
+  .mc-cell .tag {
+    font-size: 10px; padding: 2px 7px;
+    background: var(--bg-2); color: var(--ink-2);
+    border-radius: 2px; font-weight: bold; letter-spacing: 0.04em;
+  }
+
+  /* todo */
+  .todo-row { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; }
+  .todo-row:last-child { border-bottom: 0; }
+  .todo-row input[type="checkbox"] { margin-top: 2px; accent-color: var(--accent); }
+  .todo-row .meta { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 11px;
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-size: 12px;
+    display: inline-flex; align-items: center; gap: 6px;
+    line-height: 1; height: 30px; white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--line-2); background: var(--bg-2); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn-primary:hover { filter: brightness(.95); }
+  .btn-ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .btn-err { background: var(--err); color: #fff; border-color: var(--err); }
+  .btn-sm { height: 26px; padding: 4px 9px; font-size: 11.5px; }
+
+  /* ============ TABLES ============ */
+  .tbl-wrap {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  thead th {
+    text-align: left;
+    background: var(--bg-2);
+    color: var(--ink);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-1);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: var(--hover); }
+  td.id a, td a.id-link { color: var(--accent); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .status-text { font-weight: bold; }
+  .status-text.complete { color: var(--ok); }
+  .status-text.pending { color: var(--err); }
+  .status-text.no-invoice { color: var(--ok); }
+  .row-del {
+    color: var(--err); background: transparent; border: 0;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .row-del:hover { background: rgba(194,86,58,.12); }
+
+.system-settings-index a.setting {
+    background-color: var(--bg-1) !important;
+    border: 1px solid var(--bg-3) !important;
+}
+.system-settings-index a.setting .icon {
+        border-bottom: 1px solid var(--bg-3) !important;
+}
+.system-settings-index a.setting .title {
+    color: var(--accent) !important;
+}
+.system-settings-index a.setting:hover .icon {
+    color: var(--accent) !important;
+}
+.system-settings-index .setup-side-menu li.active a {
+    border-left-color: var(--accent) !important;
+    background-color: var(--bg-3) !important;
+}
+  /* ============ TABS (Search/Filter style) ============ */
+  .tabs-bar {
+    display: flex; gap: 0; border-bottom: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .tabs-bar .t {
+    padding: 9px 18px;
+    font-size: 13px; color: var(--ink-2);
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    margin-bottom: -1px;
+    cursor: pointer;
+  }
+  .tabs-bar .t.on {
+    background: var(--bg-1);
+    border-color: var(--line);
+    color: var(--ink);
+  }
+
+  /* records header */
+  .records-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-2); }
+  .records-hd .jump { display: flex; align-items: center; gap: 8px; }
+  .records-hd select { background: var(--bg-1); border: 1px solid var(--line); color: var(--ink); padding: 4px 8px; border-radius: var(--radius-sm); font: inherit; font-size: 12px; }
+
+  /* with-selected actions */
+  .ws-bar {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 14px;
+    color: var(--ink-2); font-size: 12.5px;
+  }
+
+  /* pagination */
+  .pager {
+    display: flex; justify-content: center; align-items: center; gap: 4px;
+    margin-top: 18px;
+  }
+  .pager a, .pager span {
+    padding: 5px 11px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink-1);
+    font-size: 12px;
+    background: var(--bg-1);
+  }
+  .pager .on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .pager .dis { color: var(--ink-3); pointer-events: none; }
+
+  /* badges */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10.5px; font-weight: bold;
+    padding: 2px 7px; border-radius: 2px;
+    border: 1px solid var(--line); background: var(--bg-2); color: var(--ink-1);
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .badge.ok { color: var(--ok); border-color: rgba(79,154,106,.4); background: rgba(79,154,106,.1); }
+  .badge.warn { color: var(--warn); border-color: rgba(201,161,75,.4); background: rgba(201,161,75,.1); }
+  .badge.err { color: var(--err); border-color: rgba(194,86,58,.4); background: rgba(194,86,58,.1); }
+  .badge.info { color: var(--info); border-color: rgba(90,127,166,.4); background: rgba(90,127,166,.1); }
+  .badge.muted { color: var(--ink-3); }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: var(--topbar-bg);
+    color: rgba(255,255,255,.65);
+    padding: 12px 22px;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid #000;
+  }
+  .footer a { color: rgba(255,255,255,.85); }
+  .footer .links { display: flex; align-items: center; gap: 6px; }
+
+  /* ============ SYSTEM SETTINGS ============ */
+  .settings-head {
+    margin-bottom: 22px;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+  }
+  .settings-head h1 { font-size: 26px; font-weight: normal; margin: 0; }
+  .settings-head .sub { color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+  .setup-progress { font-size: 13px; color: var(--accent); }
+  .setup-progress .bar { height: 6px; background: var(--bg-2); border-radius: 3px; margin-top: 6px; overflow: hidden; width: 280px; border: 1px solid var(--line); }
+  .setup-progress .bar > div { height: 100%; background: var(--ok); }
+
+  .settings-grid { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: start; }
+  .settings-search input {
+    width: 100%; background: var(--bg-1); border: 1px solid var(--line); color: var(--ink);
+    padding: 8px 12px 8px 32px; border-radius: var(--radius-sm); font: inherit; font-size: 13px;
+    outline: none;
+  }
+  .settings-search { position: relative; margin-bottom: 16px; }
+  .settings-search::before {
+    content: ""; position: absolute; left: 11px; top: 11px; width: 13px; height: 13px;
+    background: var(--ink-3);
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='11' cy='11' r='7'/><line x1='21' y1='21' x2='16.6' y2='16.6'/></svg>") center / contain no-repeat;
+  }
+  .settings-cats a {
+    display: block; padding: 8px 12px;
+    color: var(--ink-1); font-size: 13px;
+    border-radius: var(--radius-sm);
+  }
+  .settings-cats a:hover { background: var(--hover); text-decoration: none; }
+  .settings-cats a.on { background: var(--selected); color: var(--ink); border-left: 2px solid var(--accent); padding-left: 10px; font-weight: bold; }
+  .settings-tools-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 10px; margin-bottom: 14px; border-bottom: 1px solid var(--line);
+  }
+  .settings-tools-head .t { font-size: 18px; font-weight: bold; }
+  .settings-tools-head select { background: var(--bg-1); border: 1px solid var(--line); color: var(--ink); padding: 5px 10px; border-radius: var(--radius-sm); font: inherit; font-size: 12.5px; }
+
+  .settings-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .sc {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .sc:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .sc .ic {
+    width: 44px; height: 44px;
+    margin: 0 auto 10px;
+    color: var(--ink-3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sc:hover .ic { color: var(--accent); }
+  .sc .ic svg { width: 36px; height: 36px; }
+  .sc .nm { font-size: 13px; font-weight: bold; color: var(--accent); margin-bottom: 4px; }
+  .sc .ds { font-size: 11.5px; color: var(--ink-2); line-height: 1.4; }
+  .sc .tag-new { display: inline-block; font-size: 9px; background: var(--ok); color: #fff; padding: 1px 5px; border-radius: 2px; margin-left: 4px; vertical-align: middle; font-weight: bold; }
+  .sc .tag-upd { display: inline-block; font-size: 9px; background: var(--info); color: #fff; padding: 1px 5px; border-radius: 2px; margin-left: 4px; vertical-align: middle; font-weight: bold; }
+
+  /* ============ CHART ============ */
+  .chart-wrap { padding: 14px 18px 4px; }
+  .chart-legend { display: flex; align-items: center; gap: 14px; justify-content: center; font-size: 11.5px; color: var(--ink-2); margin-bottom: 6px; }
+  .chart-legend .dot { display: inline-flex; align-items: center; gap: 5px; }
+  .chart-legend .dot::before { content: ""; width: 14px; height: 8px; border-radius: 1px; }
+  .chart-legend .new::before { background: #b8b8b8; }
+  .chart-legend .act::before { background: var(--info); }
+  .chart-legend .inc::before { background: var(--ok); }
+
+  /* ============ TWEAKS PANEL ============ */
+  .tw {
+    position: fixed; right: 22px; bottom: 22px;
+    width: 280px;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    z-index: 1000;
+    display: none;
+  }
+  .tw.on { display: block; }
+  .tw-head {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; font-weight: bold;
+    color: var(--ink-1);
+  }
+  .tw-head button { background: transparent; border: 0; color: var(--ink-3); }
+  .tw-body { padding: 12px 14px; }
+  .tw-row { margin-bottom: 14px; }
+  .tw-row:last-child { margin-bottom: 0; }
+  .tw-row label { display: block; font-size: 11px; color: var(--ink-3); margin-bottom: 6px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
+  .seg { display: flex; gap: 0; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
+  .seg button {
+    flex: 1; background: transparent; border: 0; color: var(--ink-2);
+    padding: 6px 0; font: inherit; font-size: 11.5px;
+    border-right: 1px solid var(--line);
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button.on { background: var(--accent); color: var(--accent-ink); }
+  .swatches { display: flex; gap: 8px; }
+  .swatches button {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--line); padding: 0;
+  }
+  .swatches button.on { border-color: var(--ink); }
+
+  
+  /* ============ CLIENT PROFILE TABS ============ */
+  .profile-head {
+    background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 22px;
+    display: flex; gap: 18px; align-items: center;
+    margin-bottom: 14px;
+  }
+  .profile-head .av {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--accent); color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold;
+  }
+  .profile-head h2 { margin: 0 0 4px; font-size: 20px; }
+  .profile-head .sub { color: var(--ink-2); font-size: 12.5px; }
+  .profile-head .sub a { color: var(--accent); }
+  .profile-head .right { margin-left: auto; display: flex; gap: 8px; }
+
+  .ptabs {
+    display: flex; gap: 0; border-bottom: 1px solid var(--line);
+    margin-bottom: 16px; overflow-x: auto;
+  }
+  .ptabs button {
+    background: transparent; border: 0; padding: 10px 16px;
+    color: var(--ink-2); font-size: 12.5px; border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .ptabs button.on { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* ============ TICKET DETAIL ============ */
+  .ticket-grid { display: grid; grid-template-columns: 1fr 280px; gap: 14px; }
+  .msg-block { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .msg-block:last-child { border-bottom: 0; }
+  .msg-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 12.5px; }
+  .msg-head .who { font-weight: bold; }
+  .msg-head .role-tag { font-size: 10px; padding: 1px 6px; border: 1px solid var(--line); border-radius: 2px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+  .msg-head .when { color: var(--ink-3); font-size: 11px; margin-left: auto; }
+  .msg-body { color: var(--ink-1); font-size: 13px; line-height: 1.6; }
+  .msg-body p { margin: 0 0 8px; }
+  .msg-block.staff { background: rgba(217,119,87,.04); }
+  .meta-list dt { font-size: 11px; color: var(--ink-3); padding: 10px 16px 2px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.04em; }
+  .meta-list dd { margin: 0; padding: 0 16px 8px; color: var(--ink); font-size: 12.5px; border-bottom: 1px solid var(--line); }
+  .meta-list dd:last-child { border-bottom: 0; }
+
+  /* ============ PRODUCTS ============ */
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .price-tier { padding: 10px 16px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 100px 1fr 90px 90px 70px; gap: 10px; align-items: center; font-size: 12.5px; }
+  .price-tier:last-child { border-bottom: 0; }
+  .price-tier .t-l { color: var(--ink-2); font-weight: bold; font-size: 11.5px; text-transform: uppercase; }
+  .price-tier input { width: 100%; padding: 5px 8px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink); font: inherit; font-size: 12px; }
+  .product-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .product-spec-grid .label { font-size: 10.5px; color: var(--ink-3); margin-bottom: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
+  .product-spec-grid .body { font-size: 12.5px; line-height: 1.65; }
+
+  /* ============ INVOICE ============ */
+  .totals { display: grid; grid-template-columns: 1fr 280px; border-top: 1px solid var(--line); }
+  .totals .left { padding: 14px 16px; color: var(--ink-3); font-size: 11.5px; }
+  .totals .right { padding: 12px 16px; border-left: 1px solid var(--line); }
+  .totals .row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; color: var(--ink-1); font-variant-numeric: tabular-nums; }
+  .totals .row.total { font-size: 18px; font-weight: bold; color: var(--ink); border-top: 1px solid var(--line); margin-top: 8px; padding-top: 10px; }
+
+  /* ============ LOGIN ============ */
+  .login {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg);
+  }
+  .login-art {
+    background: var(--bg-1);
+    border-right: 1px solid var(--line);
+    padding: 36px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .login-art::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: .5;
+    mask-image: radial-gradient(ellipse at 30% 50%, black, transparent 70%);
+  }
+  .login-art > * { position: relative; }
+  .login-art .brand { font-size: 17px; font-weight: bold; }
+  .login-art .brand .accent { color: var(--accent); }
+  .login-art h2 { font-size: 42px; font-weight: normal; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .login-art .lead { color: var(--ink-2); font-size: 14px; max-width: 380px; line-height: 1.5; }
+  .login-form {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 36px 64px;
+    max-width: 480px; margin: 0 auto; width: 100%;
+  }
+  .login-form h1 { font-size: 28px; font-weight: normal; margin: 0 0 24px; }
+  .field { display: block; margin-bottom: 14px; }
+  .field label { display: block; font-size: 11.5px; font-weight: bold; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
+  .field input {
+    width: 100%; background: var(--bg-1); border: 1px solid var(--line); color: var(--ink);
+    padding: 9px 11px; border-radius: var(--radius-sm); font: inherit; font-size: 13px; outline: none;
+  }
+  .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,.18); }
+  .check { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-2); }
+  .check input { accent-color: var(--accent); }
+  .login-row { display: flex; justify-content: space-between; align-items: center; margin: 6px 0 18px; }
+
+  /* responsive */
+  @media (max-width: 1240px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .dash-grid { grid-template-columns: 1fr; }
+    .settings-cards { grid-template-columns: repeat(3, 1fr); }
+    .product-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 1100px) {
+    .app { grid-template-columns: 56px 1fr; }
+    .side { display: none; }
+  }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .rail, .side { display: none; }
+    .login { grid-template-columns: 1fr; }
+    .login-art { display: none; }
+    .ticket-grid { grid-template-columns: 1fr; }
+    .settings-grid { grid-template-columns: 1fr; }
+  }
+
+  .ico { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+  .right { text-align: right; }
+  .muted { color: var(--ink-2); }
+
+/* ============================================================
+ * BOOTSTRAP 3 / WHMCS CORE OVERRIDES
+ * These re-skin the markup that WHMCS core (widgets, system
+ * settings, intellisearch, modals, forms, tables) emits so it
+ * matches the nkotov palette instead of the blend defaults.
+ * ============================================================ */
+
+body.nkotov-admin { font-family: var(--font-sans) !important; font-size: 13px; background: var(--bg) !important; color: var(--ink) !important; }
+body.nkotov-admin h1, body.nkotov-admin h2, body.nkotov-admin h3, body.nkotov-admin h4, body.nkotov-admin h5 { color: var(--ink); font-family: var(--font-sans); }
+body.nkotov-admin a { color: var(--accent); !important}
+body.nkotov-admin a:hover, body.nkotov-admin a:focus { color: var(--accent); text-decoration: underline; }
+body.nkotov-admin hr { border-color: var(--line); }
+body.nkotov-admin label { color: var(--ink-1); font-weight: bold; }
+body.nkotov-admin .text-muted, body.nkotov-admin .help-block { color: var(--ink-2) !important; }
+
+/* ---- Panels (used by every widget) ---- */
+body.nkotov-admin .panel { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none; margin-bottom: 14px; }
+body.nkotov-admin .panel-default, body.nkotov-admin .panel-primary, body.nkotov-admin .panel-info, body.nkotov-admin .panel-success, body.nkotov-admin .panel-warning, body.nkotov-admin .panel-danger { border-color: var(--line); }
+body.nkotov-admin .panel-heading { background: var(--bg-1); border-bottom: 1px solid var(--line); color: var(--accent); padding: 11px 14px; border-radius: var(--radius) var(--radius) 0 0; }
+body.nkotov-admin .panel-heading .panel-title, body.nkotov-admin .panel-title { color: var(--accent); font-size: 14px; font-weight: bold; margin: 0; }
+body.nkotov-admin .panel-body { padding: 14px 16px; color: var(--ink-1); }
+body.nkotov-admin .panel-footer { background: var(--bg-1); border-top: 1px solid var(--line); padding: 10px 14px; color: var(--ink-2); font-size: 12px; }
+body.nkotov-admin .panel-primary > .panel-heading { background: var(--bg-1); color: var(--accent); border-bottom-color: var(--line); }
+
+/* widget tools (refresh / minimise / close) */
+body.nkotov-admin .widget-tools { float: right; display: flex; gap: 8px; }
+body.nkotov-admin .widget-tools a { color: var(--ink-3); }
+body.nkotov-admin .widget-tools a:hover { color: var(--ink-1); text-decoration: none; }
+
+/* ---- Buttons ---- */
+body.nkotov-admin .btn { background: var(--bg-1); border: 1px solid var(--line); color: var(--ink); border-radius: var(--radius-sm); font-size: 12px; padding: 6px 11px; height: auto; line-height: 1.3; }
+body.nkotov-admin .btn:hover, body.nkotov-admin .btn:focus { background: var(--bg-2); border-color: var(--line-2); color: var(--ink); outline: none; }
+body.nkotov-admin .btn-default { background: var(--bg-1); border-color: var(--line); color: var(--ink); }
+body.nkotov-admin .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+body.nkotov-admin .btn-primary:hover, body.nkotov-admin .btn-primary:focus { filter: brightness(.92); background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+body.nkotov-admin .btn-success { background: var(--ok); border-color: var(--ok); color: #fff; }
+body.nkotov-admin .btn-info { background: var(--info); border-color: var(--info); color: #fff; }
+body.nkotov-admin .btn-warning { background: var(--warn); border-color: var(--warn); color: #fff; }
+body.nkotov-admin .btn-danger { background: var(--err); border-color: var(--err); color: #fff; }
+body.nkotov-admin .btn-link { background: transparent; border: 0; color: var(--accent); }
+body.nkotov-admin .btn-xs { padding: 2px 7px; font-size: 11px; }
+body.nkotov-admin .btn-sm { padding: 4px 9px; font-size: 11.5px; }
+body.nkotov-admin .btn-lg { padding: 9px 14px; font-size: 14px; }
+body.nkotov-admin .btn-block { display: block; width: 100%; }
+
+/* ---- Forms ---- */
+body.nkotov-admin .form-control, body.nkotov-admin input[type="text"], body.nkotov-admin input[type="email"], body.nkotov-admin input[type="password"], body.nkotov-admin input[type="number"], body.nkotov-admin input[type="search"], body.nkotov-admin input[type="tel"], body.nkotov-admin input[type="url"], body.nkotov-admin select, body.nkotov-admin textarea {
+  background: var(--bg-1); border: 1px solid var(--line); color: var(--ink); border-radius: var(--radius-sm); font-size: 13px; padding: 6px 10px; height: auto; line-height: 1.4; box-shadow: none;
+}
+body.nkotov-admin .form-control:focus, body.nkotov-admin input:focus, body.nkotov-admin select:focus, body.nkotov-admin textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,.18); outline: none; }
+body.nkotov-admin .form-control::placeholder { color: var(--ink-3); }
+body.nkotov-admin .input-group-addon, body.nkotov-admin .input-group-btn .btn { background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-1); }
+body.nkotov-admin .checkbox label, body.nkotov-admin .radio label { color: var(--ink-1); font-weight: normal; }
+body.nkotov-admin input[type="checkbox"], body.nkotov-admin input[type="radio"] { accent-color: var(--accent); }
+
+/* ---- Tables ---- */
+body.nkotov-admin .table { background: var(--bg-1); color: var(--ink-1); margin-bottom: 0; border-radius: var(--radius); border-collapse: separate; border-spacing: 0; }
+body.nkotov-admin .table > thead > tr > th { background: var(--bg-2); color: var(--ink); border-bottom: 1px solid var(--line); border-top: 0; font-weight: bold; padding: 8px 12px; font-size: 12px; }
+body.nkotov-admin .table > tbody > tr > td, body.nkotov-admin .table > tbody > tr > th, body.nkotov-admin .table > tfoot > tr > td { border-top: 1px solid var(--line); padding: 9px 12px; color: var(--ink-1); vertical-align: middle; }
+body.nkotov-admin .table > tbody > tr:hover > td { background: var(--hover); }
+body.nkotov-admin .table-bordered { border: 1px solid var(--line); }
+body.nkotov-admin .table-bordered > thead > tr > th, body.nkotov-admin .table-bordered > tbody > tr > td { border: 1px solid var(--line); }
+body.nkotov-admin .table-striped > tbody > tr:nth-of-type(odd) { background: var(--bg-2); }
+
+/* ---- Alerts ---- */
+body.nkotov-admin .alert { border-radius: var(--radius); padding: 12px 16px; border: 1px solid var(--line); background: var(--bg-1); color: var(--ink-1); }
+body.nkotov-admin .alert-success { background: rgba(79,154,106,.10); border-color: rgba(79,154,106,.4); color: var(--ok); }
+body.nkotov-admin .alert-info { background: rgba(90,127,166,.10); border-color: rgba(90,127,166,.4); color: var(--info); }
+body.nkotov-admin .alert-warning { background: rgba(201,161,75,.10); border-color: rgba(201,161,75,.4); color: var(--warn); }
+body.nkotov-admin .alert-danger { background: rgba(194,86,58,.10); border-color: rgba(194,86,58,.4); color: var(--err); }
+
+/* ---- Labels (the small status pills) ---- */
+body.nkotov-admin .label { font-size: 10.5px; font-weight: bold; padding: 2px 7px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+body.nkotov-admin .label-default { background: var(--bg-3); color: var(--ink-1); }
+body.nkotov-admin .label-primary { background: var(--accent); color: var(--accent-ink); }
+body.nkotov-admin .label-success { background: var(--ok); color: #fff; }
+body.nkotov-admin .label-info { background: var(--info); color: #fff; }
+body.nkotov-admin .label-warning { background: var(--warn); color: #fff; }
+body.nkotov-admin .label-danger { background: var(--err); color: #fff; }
+
+/* ---- Tabs (nav-tabs) ---- */
+body.nkotov-admin .nav-tabs { border-bottom: 1px solid var(--line); }
+body.nkotov-admin .nav-tabs > li > a { color: var(--ink-2); border: 1px solid transparent; border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; margin-right: 0; padding: 9px 16px; }
+body.nkotov-admin .nav-tabs > li > a:hover { background: var(--hover); border-color: transparent; }
+body.nkotov-admin .nav-tabs > li.active > a, body.nkotov-admin .nav-tabs > li.active > a:hover, body.nkotov-admin .nav-tabs > li.active > a:focus { background: var(--bg-1); border: 1px solid var(--line); border-bottom-color: var(--bg-1); color: var(--ink); }
+body.nkotov-admin .tab-content { background: var(--bg-1); border: 1px solid var(--line); border-top: 0; padding: 16px; border-radius: 0 0 var(--radius) var(--radius); }
+
+/* nav-pills */
+body.nkotov-admin .nav-pills > li > a { color: var(--ink-1); border-radius: var(--radius-sm); }
+body.nkotov-admin .nav-pills > li.active > a { background: var(--accent); color: var(--accent-ink); }
+
+/* ---- Lists used in sidebar/menus ---- */
+body.nkotov-admin .sidebar ul, body.nkotov-admin .side ul, body.nkotov-admin .side-block ul { list-style: none; padding: 0; margin: 0; }
+body.nkotov-admin .sidebar ul.menu li, body.nkotov-admin .side ul.menu li, body.nkotov-admin .side-block ul li { padding: 0; }
+body.nkotov-admin .sidebar ul.menu li a, body.nkotov-admin .side ul.menu li a { display: block; padding: 5px 0; color: var(--accent); font-size: 12.5px; }
+body.nkotov-admin .sidebar ul.menu li a:hover { text-decoration: underline; }
+body.nkotov-admin .sidebar-header { display: flex; align-items: center; gap: 7px; padding: 12px 16px 8px; font-size: 12px; font-weight: bold; color: var(--ink); border-top: 1px solid var(--line); }
+body.nkotov-admin .sidebar-header:first-child { border-top: 0; }
+body.nkotov-admin .sidebar-header i { color: var(--ink-2); width: 13px; }
+body.nkotov-admin .content-padded { padding: 4px 16px 12px; font-size: 12.5px; color: var(--ink-1); line-height: 1.6; }
+body.nkotov-admin .content-padded.small { font-size: 11.5px; }
+body.nkotov-admin .sub-header { display: block; font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; font-weight: bold; margin-top: 6px; margin-bottom: 4px; }
+body.nkotov-admin .bottom-margin-5 { margin-bottom: 8px; }
+body.nkotov-admin .top-margin-5 { margin-top: 8px; }
+body.nkotov-admin .btn-min-sidebar { display: block; width: calc(100% - 24px); margin: 12px; padding: 7px 0; text-align: center; background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-2); border-radius: var(--radius-sm); font-size: 11.5px; }
+body.nkotov-admin .btn-min-sidebar:hover { background: var(--bg-3); text-decoration: none; }
+
+/* ---- Modals ---- */
+body.nkotov-admin .modal-content { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+body.nkotov-admin .modal-header { background: var(--bg-1); border-bottom: 1px solid var(--line); padding: 14px 18px; border-radius: var(--radius) var(--radius) 0 0; }
+body.nkotov-admin .modal-header .modal-title { color: var(--ink); font-size: 16px; font-weight: bold; }
+body.nkotov-admin .modal-header .close { color: var(--ink-2); opacity: .8; }
+body.nkotov-admin .modal-body { padding: 16px 18px; color: var(--ink-1); }
+body.nkotov-admin .modal-footer { border-top: 1px solid var(--line); padding: 12px 18px; }
+body.nkotov-admin .modal-backdrop.in { opacity: .65; }
+
+/* ---- Dropdowns ---- */
+body.nkotov-admin .dropdown-menu { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: 0 8px 22px rgba(0,0,0,.35); padding: 4px; }
+body.nkotov-admin .dropdown-menu > li > a { color: var(--ink-1); padding: 6px 12px; border-radius: var(--radius-sm); }
+body.nkotov-admin .dropdown-menu > li > a:hover, body.nkotov-admin .dropdown-menu > li > a:focus { background: var(--hover); color: var(--ink); }
+body.nkotov-admin .dropdown-menu .divider { background: var(--line); margin: 4px 0; }
+body.nkotov-admin .dropdown-menu > .active > a { background: var(--accent); color: var(--accent-ink); }
+
+/* ---- Pagination ---- */
+body.nkotov-admin .pagination > li > a, body.nkotov-admin .pagination > li > span { background: var(--bg-1); border-color: var(--line); color: var(--ink-1); }
+body.nkotov-admin .pagination > .active > a, body.nkotov-admin .pagination > .active > span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+body.nkotov-admin .pagination > .disabled > a { color: var(--ink-3); }
+
+/* ---- Breadcrumbs ---- */
+body.nkotov-admin .breadcrumb { background: transparent; padding: 0; margin-bottom: 14px; font-size: 12px; }
+body.nkotov-admin .breadcrumb > li { color: var(--ink-2); }
+body.nkotov-admin .breadcrumb > li + li::before { color: var(--ink-3); }
+
+/* ---- Status colours used in lists (clientssummary, orders etc.) ---- */
+body.nkotov-admin .textgreen, body.nkotov-admin .text-success { color: var(--ok) !important; font-weight: bold; }
+body.nkotov-admin .textred, body.nkotov-admin .text-danger { color: var(--err) !important; font-weight: bold; }
+body.nkotov-admin .textyellow, body.nkotov-admin .text-warning { color: var(--warn) !important; font-weight: bold; }
+body.nkotov-admin .textblue, body.nkotov-admin .text-info { color: var(--info) !important; font-weight: bold; }
+body.nkotov-admin .textgrey { color: var(--ink-3) !important; }
+
+/* ---- Footerbar (the WHMCS bottom bar) ---- */
+body.nkotov-admin .footerbar { background: var(--topbar-bg); color: rgba(255,255,255,.65); padding: 12px 22px; font-size: 12px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #000; }
+body.nkotov-admin .footerbar a { color: rgba(255,255,255,.85); }
+body.nkotov-admin .footerbar .copyright { flex: 1; }
+body.nkotov-admin .footerbar .links { text-align: right; }
+
+/* ---- IntelliSearch overlay ---- */
+body.nkotov-admin .intellisearch { display: none; position: fixed; top: 48px; left: 0; right: 0; background: var(--bg-1); border-bottom: 1px solid var(--line); padding: 14px 22px; z-index: 90; box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+body.nkotov-admin .intellisearch.active { display: block; }
+body.nkotov-admin .intellisearch .input-group { max-width: 720px; margin: 0 auto; }
+body.nkotov-admin .intellisearch .loader { display: none; }
+
+/* ---- IntelliSearch system-settings overlay (fallback) ---- */
+ .intellisearch {
+    position: relative;
+}
+
+ #intelliSearchResults {
+    position: absolute;
+    top: calc(100% + 8px); 
+    left: 0;
+    width: 100% 
+    z-index: 10000;
+    max-height: 460px;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: none; 
+}
+
+ body.nkotov-admin #intelliSearchResults {
+    background: var(--bg);
+    padding: 14px 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin: 0;
+    width: 100%;
+    top: 19%;
+    text-align: center;
+    font-size: 12px;
+}
+body.nkotov-admin #intelliSearchResults ul { list-style: disc; padding-left: 24px; }
+
+/* ---- Wells / setup task list ---- */
+body.nkotov-admin .well { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: none; color: var(--ink-1); }
+body.nkotov-admin .well-sm { padding: 9px 12px; }
+
+/* ---- Hide leftover blend chrome ---- */
+body.nkotov-admin .navigation, body.nkotov-admin .sidebar-opener, body.nkotov-admin .sidebar-collapse-expand { display: none !important; }
+
+/* ---- App layout fix when no $sidebar ---- */
+body.nkotov-admin.no-sidebar .app { grid-template-columns: 64px 1fr; }
+body.nkotov-admin.no-sidebar .app > .side { display: none; }
+
+/* ---- Misc utility classes WHMCS sprinkles around ---- */
+body.nkotov-admin .clear, body.nkotov-admin .clearfix::after { clear: both; }
+body.nkotov-admin .pull-right { float: right; }
+body.nkotov-admin .pull-left { float: left; }
+body.nkotov-admin .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+body.nkotov-admin .absmiddle { vertical-align: middle; }
+body.nkotov-admin .small, body.nkotov-admin small { font-size: 11.5px; color: var(--ink-2); }
+
+/* ---- Selectize / select2 used by tags ---- */
+body.nkotov-admin .selectize-control .selectize-input, body.nkotov-admin .select2-container .select2-selection { background: var(--bg-1) !important; border-color: var(--line) !important; color: var(--ink) !important; }
+body.nkotov-admin .select2-dropdown { background: var(--bg-1); border-color: var(--line); }
+body.nkotov-admin .select2-results__option--highlighted { background: var(--accent) !important; color: var(--accent-ink) !important; }
+
+/* ---- Home widget masonry ---- */
+body.nkotov-admin .home-widgets-container { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+body.nkotov-admin .dashboard-panel-sizer { display: none; }
+body.nkotov-admin .dashboard-panel-item { width: auto !important; position: static !important; }
+body.nkotov-admin .dashboard-panel-item-columns-2 { grid-column: span 2; }
+@media (max-width: 1100px) {
+  body.nkotov-admin .home-widgets-container { grid-template-columns: 1fr; }
+  body.nkotov-admin .dashboard-panel-item-columns-2 { grid-column: span 1; }
+}
+
+/* ---- System Settings overrides for ядро WHMCS markup ---- */
+body.nkotov-admin .system-settings { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+body.nkotov-admin .system-settings .system-settings-search { margin-bottom: 14px; }
+body.nkotov-admin .system-settings ul { list-style: none; padding: 0; margin: 0; }
+body.nkotov-admin .system-settings .nav-categories li a { display: block; padding: 7px 12px; color: var(--ink-1); border-radius: var(--radius-sm); font-size: 13px; }
+body.nkotov-admin .system-settings .nav-categories li.active a, body.nkotov-admin .system-settings .nav-categories li a.active { background: var(--selected); color: var(--ink); border-left: 2px solid var(--accent); padding-left: 10px; }
+body.nkotov-admin .system-settings .system-settings-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+body.nkotov-admin .system-settings-card, body.nkotov-admin .settings-card { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 14px; text-align: center; cursor: pointer; }
+body.nkotov-admin .system-settings-card:hover, body.nkotov-admin .settings-card:hover { border-color: var(--accent); }
+body.nkotov-admin .system-settings-card .icon, body.nkotov-admin .settings-card .icon { color: var(--ink-3); font-size: 30px; margin-bottom: 10px; }
+body.nkotov-admin .system-settings-card:hover .icon { color: var(--accent); }
+body.nkotov-admin .system-settings-card .name, body.nkotov-admin .settings-card .name { color: var(--accent); font-weight: bold; font-size: 13px; }
+body.nkotov-admin .system-settings-card .description, body.nkotov-admin .settings-card .description { color: var(--ink-2); font-size: 11.5px; margin-top: 4px; }
+
+/* ---- Setup tasks panel at top of system settings ---- */
+body.nkotov-admin .setup-progress-panel { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 18px; }
+body.nkotov-admin .setup-progress-panel .progress { background: var(--bg-2); border-radius: 3px; height: 6px; overflow: hidden; box-shadow: none; margin: 8px 0; }
+body.nkotov-admin .setup-progress-panel .progress-bar { background: var(--ok); }
+
+/* ---- Recently Visited list under system settings ---- */
+body.nkotov-admin .recently-visited ol { padding-left: 22px; color: var(--ink-1); }
+body.nkotov-admin .recently-visited a { color: var(--accent); }
+
+/* ---- Tooltips ---- */
+body.nkotov-admin .tooltip-inner { background: #000; color: #fff; font-size: 11px; }
+body.nkotov-admin .tooltip.in { opacity: .95; }
+
+/* ---- Page heading WHMCS auto-emits ---- */
+body.nkotov-admin .main h1 { font-size: 24px; font-weight: normal; margin: 0 0 16px; color: var(--ink); letter-spacing: -0.005em; }
+
+/* ---- Reduce float-collapse weirdness in main column ---- */
+body.nkotov-admin .main .page > div[style*="float:left"] { float: none !important; width: auto !important; }
+
+/* ============================================================
+   DASHBOARD WIDGET OVERRIDES — dark cards
+   ============================================================ */
+
+/* Masonry grid containers */
+.home-widgets-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 14px;
+}
+.dashboard-panel-sizer { display: none; }
+.dashboard-panel-item { flex: 1 1 calc(50% - 7px); min-width: 300px; }
+.dashboard-panel-item-columns-2 { flex: 1 1 calc(50% - 7px); }
+.dashboard-panel-item-columns-1 { flex: 0 0 320px; }
+.dashboard-panel-static-item { margin-bottom: 14px; }
+.hidden { display: none !important; }
+.addon-html-output-container { margin-bottom: 10px; }
+
+/* Card — dark panel wrapper */
+.card {
+    background: var(--bg-1) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: var(--radius) !important;
+    margin-bottom: 0 !important;
+    color: var(--ink) !important;
+}
+.card-head, .panel-heading {
+    padding: 10px 14px !important;
+    border-bottom: 1px solid var(--line) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: var(--bg-1) !important;
+    color: var(--ink) !important;
+}
+.card-title, .panel-title {
+    margin: 0 !important;
+    font-size: 13.5px !important;
+    font-weight: bold !important;
+    color: var(--accent) !important;
+}
+.card-body, .panel-body {
+    padding: 14px !important;
+    background: var(--bg-1) !important;
+    color: var(--ink) !important;
+}
+.card .panel-footer, .panel-default > .panel-footer {
+    background: var(--bg-2) !important;
+    border-top: 1px solid var(--line) !important;
+    color: var(--ink-2) !important;
+    padding: 8px 14px !important;
+}
+
+/* Widget tools */
+.widget-tools { display: flex; gap: 6px; align-items: center; }
+.widget-tools a { color: var(--ink-3) !important; font-size: 11px; }
+.widget-tools a:hover { color: var(--ink-1) !important; text-decoration: none; }
+
+/* Widget settings dropdown */
+.widget-settings { margin-bottom: 14px; }
+#widgetSettingsDropdownMenu {
+    background: var(--bg-1) !important;
+    border: 1px solid var(--line) !important;
+    min-width: 240px;
+}
+#widgetSettingsDropdownMenu h4 {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 12px;
+    color: var(--ink-2) !important;
+    border-bottom: 1px solid var(--line);
+}
+#widgetSettingsDropdownMenu li { padding: 4px 14px; }
+#widgetSettingsDropdownMenu li label { color: var(--ink-1) !important; }
+
+/* Override Bootstrap panel defaults for dark theme */
+.panel { background: var(--bg-1) !important; border-color: var(--line) !important; }
+.panel-default > .panel-heading { background: var(--bg-2) !important; border-color: var(--line) !important; color: var(--ink) !important; }
+.panel-default > .panel-heading .panel-title { color: var(--accent) !important; }
+
+/* Tables inside widgets */
+.panel table, .card table { color: var(--ink) !important; }
+.panel table > thead > tr > th,
+.card  table > thead > tr > th {
+    background: var(--bg-2) !important;
+    color: var(--ink) !important;
+    border-color: var(--line) !important;
+}
+.panel table > tbody > tr > td,
+.card  table > tbody > tr > td {
+    color: var(--ink-1) !important;
+    border-color: var(--line) !important;
+}
+.panel table > tbody > tr:hover > td,
+.card  table > tbody > tr:hover > td { background: var(--hover) !important; }
+
+/* Form inputs inside content area (overrides blend's white inputs) */
+.contentarea input[type="text"],
+.contentarea input[type="password"],
+.contentarea input[type="email"],
+.contentarea input[type="number"],
+.contentarea input[type="search"],
+.contentarea input[type="url"],
+.contentarea select,
+.contentarea textarea,
+.main input[type="text"],
+.main input[type="password"],
+.main select,
+.main textarea {
+    background: var(--bg-2) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+}
+.contentarea input:focus,
+.contentarea select:focus,
+.contentarea textarea:focus,
+.main input:focus,
+.main select:focus,
+.main textarea:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.15) !important;
+    outline: none !important;
+}
+
+/* Override blend's white body/content background */
+#contentarea,
+.contentarea,
+.main,
+body.nkotov-admin #contentarea {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+}
+
+/* Override blend's .well, .box, etc */
+.well { background: var(--bg-1) !important; border-color: var(--line) !important; color: var(--ink) !important; }
+.box { background: var(--bg-1) !important; border-color: var(--line) !important; }
+
+/* Override Bootstrap form-control */
+.form-control {
+    background-color: var(--bg-2) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+}
+.form-control:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(46,124,246,.15) !important;
+}
+.input-group-addon {
+    background: var(--bg-3) !important;
+    border-color: var(--line) !important;
+    color: var(--ink-2) !important;
+}
+
+/* Override Bootstrap table */
+.table { color: var(--ink) !important; }
+.table > thead > tr > th { background: var(--bg-2) !important; color: var(--ink) !important; border-color: var(--line) !important; }
+.table > tbody > tr > td { color: var(--ink-1) !important; border-color: var(--line) !important; }
+.table-striped > tbody > tr:nth-of-type(odd) { background: var(--hover) !important; }
+.table > tbody > tr:hover > td { background: var(--hover) !important; }
+.table-bordered { border-color: var(--line) !important; }
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > td { border-color: var(--line) !important; }
+
+/* Pagination */
+.pagination > li > a,
+.pagination > li > span {
+    background: var(--bg-1) !important;
+    border-color: var(--line) !important;
+    color: var(--ink-1) !important;
+}
+.pagination > li > a:hover { background: var(--bg-2) !important; color: var(--ink) !important; }
+.pagination > .active > a,
+.pagination > .active > span {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #fff !important;
+}
+.pagination > .disabled > a { color: var(--ink-3) !important; }
+
+/* Tabs */
+.nav-tabs { border-color: var(--line) !important; }
+.nav-tabs > li > a { color: var(--ink-2) !important; background: transparent !important; border-color: transparent !important; }
+.nav-tabs > li > a:hover { background: var(--hover) !important; border-color: var(--line) !important; color: var(--ink) !important; }
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+    background: var(--bg-1) !important;
+    border-color: var(--line) !important;
+    border-bottom-color: var(--bg-1) !important;
+    color: var(--ink) !important;
+}
+.tab-content { background: var(--bg-1) !important; border: 1px solid var(--line) !important; border-top: 0 !important; padding: 14px !important; }
+
+/* Buttons — keep blend btn classes working */
+.btn-default {
+    background: var(--bg-1) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+}
+.btn-default:hover { background: var(--bg-2) !important; border-color: var(--line-2) !important; }
+.btn-primary { background: var(--accent) !important; border-color: var(--accent-dk, #1a5fc8) !important; color: #fff !important; }
+.btn-primary:hover { filter: brightness(.9) !important; }
+
+/* Labels/badges */
+.label-default { background: var(--bg-3) !important; color: var(--ink-1) !important; }
+
+/* Dropdown menus */
+.dropdown-menu {
+    background: #1a1a1a !important;
+    border: 1px solid #000 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5) !important;
+}
+.dropdown-menu > li > a { color: rgba(255,255,255,.75) !important; }
+.dropdown-menu > li > a:hover { background: rgba(255,255,255,.07) !important; color: #fff !important; }
+.dropdown-menu > .divider { background: rgba(255,255,255,.08) !important; }
+
+/* Alerts (override blend) */
+.alert { border-radius: var(--radius-sm) !important; }
+.alert-info    { background: rgba(90,127,166,.12) !important; border-color: rgba(90,127,166,.35) !important; color: var(--info) !important; }
+.alert-success { background: rgba(79,154,106,.12) !important; border-color: rgba(79,154,106,.35) !important; color: var(--ok) !important; }
+.alert-warning { background: rgba(201,161,75,.12) !important; border-color: rgba(201,161,75,.35) !important; color: var(--warn) !important; }
+.alert-danger  { background: rgba(194,86,58,.12) !important;  border-color: rgba(194,86,58,.35) !important;  color: var(--err) !important; }
+
+/* Modals */
+.modal-content { background: var(--bg-1) !important; border-color: var(--line) !important; }
+.modal-header  { border-color: var(--line) !important; background: var(--bg-2) !important; }
+.modal-footer  { border-color: var(--line) !important; background: var(--bg-2) !important; }
+.modal-title   { color: var(--ink) !important; }
+
+/* Breadcrumb */
+.breadcrumb { background: transparent !important; color: var(--ink-2) !important; }
+.breadcrumb > li + li::before { color: var(--ink-3) !important; }
+
+/* List groups */
+.list-group-item { background: var(--bg-1) !important; border-color: var(--line) !important; color: var(--ink-1) !important; }
+.list-group-item:hover { background: var(--bg-2) !important; }
+.list-group-item.active { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+
+/* Progress bars */
+.progress { background: var(--bg-3) !important; }
+
+/* Checkboxes / radios */
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+
+/* clientssummary table fix */
+.clientssummarystats tr td { background: transparent !important; }
+.clientssummarystats .altrow td { background: var(--hover) !important; }
+
+/* ============================================================
+   TOPBAR + ADD NEW DROPDOWN
+   ============================================================ */
+.topbar-addnew {
+  position: relative;
+  margin-right: 4px;
+}
+.topbar-addnew-btn {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background .12s;
+}
+.topbar-addnew-btn:hover { background: rgba(255,255,255,.15); }
+.topbar-addnew-btn .ico { width: 14px; height: 14px; }
+.topbar-addnew-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 180px;
+  background: #1a1a1a;
+  border: 1px solid #000;
+  border-top: 2px solid var(--accent);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  z-index: 500;
+  list-style: none;
+  margin: 0; padding: 4px 0;
+}
+.topbar-addnew-menu.open { display: block; }
+.topbar-addnew-menu li a {
+  display: block;
+  padding: 8px 14px;
+  color: rgba(255,255,255,.8);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.topbar-addnew-menu li a:hover {
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ============================================================
+   CONTENT AREA — aggressive dark overrides for blend HTML
+   ============================================================ */
+
+/* Force dark background on all blend structural containers */
+body.nkotov-admin .contentarea,
+body.nkotov-admin #contentarea,
+body.nkotov-admin .main,
+body.nkotov-admin .page {
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+}
+
+/* Generic containers blend injects */
+body.nkotov-admin .box,
+body.nkotov-admin .well,
+body.nkotov-admin .portlet,
+body.nkotov-admin .widget,
+body.nkotov-admin .dataTables_wrapper {
+  background: transparent !important;
+  color: var(--ink) !important;
+}
+
+/* ── HEADINGS inside content ── */
+body.nkotov-admin #contentarea h1,
+body.nkotov-admin #contentarea h2,
+body.nkotov-admin #contentarea h3,
+body.nkotov-admin #contentarea h4 {
+  color: var(--ink) !important;
+}
+
+/* ── TABLES ── */
+body.nkotov-admin table {
+  color: var(--ink) !important;
+}
+body.nkotov-admin table th {
+  background: var(--bg-2) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+  font-weight: bold !important;
+}
+body.nkotov-admin table td {
+  color: var(--ink-1) !important;
+  border-color: var(--line) !important;
+  background: transparent !important;
+}
+body.nkotov-admin table tr:hover td {
+  background: var(--hover) !important;
+}
+body.nkotov-admin table .odd td  { background: var(--bg-1) !important; }
+body.nkotov-admin table .even td { background: var(--bg) !important; }
+body.nkotov-admin table .odd:hover td,
+body.nkotov-admin table .even:hover td { background: var(--hover) !important; }
+
+/* DataTables specific */
+body.nkotov-admin .dataTables_wrapper .dataTables_info,
+body.nkotov-admin .dataTables_wrapper .dataTables_length,
+body.nkotov-admin .dataTables_wrapper .dataTables_filter {
+  color: var(--ink-2) !important;
+}
+body.nkotov-admin .dataTables_wrapper .dataTables_filter input {
+  background: var(--bg-2) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .DTTT_container .btn { color: var(--ink) !important; }
+
+/* ── FORMS ── */
+body.nkotov-admin input[type="text"],
+body.nkotov-admin input[type="password"],
+body.nkotov-admin input[type="email"],
+body.nkotov-admin input[type="number"],
+body.nkotov-admin input[type="search"],
+body.nkotov-admin input[type="url"],
+body.nkotov-admin input[type="tel"],
+body.nkotov-admin input[type="date"],
+body.nkotov-admin select,
+body.nkotov-admin textarea {
+  background: var(--bg-2) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--ink) !important;
+  border-radius: var(--radius-sm) !important;
+}
+body.nkotov-admin input:focus,
+body.nkotov-admin select:focus,
+body.nkotov-admin textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(46,124,246,.15) !important;
+  outline: none !important;
+}
+body.nkotov-admin label { color: var(--ink-1) !important; }
+body.nkotov-admin .form-group > label { color: var(--ink-2) !important; font-size: 12px !important; }
+body.nkotov-admin .form-control {
+  background: var(--bg-2) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .form-control:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(46,124,246,.15) !important;
+}
+body.nkotov-admin .input-group-addon {
+  background: var(--bg-3) !important;
+  border-color: var(--line) !important;
+  color: var(--ink-2) !important;
+}
+body.nkotov-admin .help-block { color: var(--ink-2) !important; }
+
+/* ── PANELS / BOXES ── */
+body.nkotov-admin .panel {
+  background: var(--bg-1) !important;
+  border-color: var(--line) !important;
+}
+body.nkotov-admin .panel-heading,
+body.nkotov-admin .panel-default > .panel-heading {
+  background: var(--bg-2) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .panel-default > .panel-heading .panel-title { color: var(--accent) !important; }
+body.nkotov-admin .panel-primary > .panel-heading { background: var(--accent) !important; border-color: var(--accent) !important; }
+body.nkotov-admin .panel-primary > .panel-heading .panel-title { color: #fff !important; }
+body.nkotov-admin .panel-body { background: var(--bg-1) !important; color: var(--ink) !important; }
+body.nkotov-admin .panel-footer { background: var(--bg-2) !important; border-color: var(--line) !important; color: var(--ink-2) !important; }
+
+/* ── TABS ── */
+body.nkotov-admin .nav-tabs { border-color: var(--line) !important; }
+body.nkotov-admin .nav-tabs > li > a {
+  color: var(--ink-2) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+body.nkotov-admin .nav-tabs > li > a:hover {
+  background: var(--hover) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .nav-tabs > li.active > a,
+body.nkotov-admin .nav-tabs > li.active > a:hover {
+  background: var(--bg-1) !important;
+  border-color: var(--line) var(--line) transparent !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .tab-content {
+  background: var(--bg-1) !important;
+  border: 1px solid var(--line) !important;
+  border-top: 0 !important;
+  padding: 16px !important;
+  color: var(--ink) !important;
+}
+
+/* ── BUTTONS ── */
+body.nkotov-admin .btn-default {
+  background: var(--bg-1) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .btn-default:hover { background: var(--bg-2) !important; }
+body.nkotov-admin .btn-primary { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+body.nkotov-admin .btn-success { background: var(--ok) !important; border-color: var(--ok) !important; color: #fff !important; }
+body.nkotov-admin .btn-danger  { background: var(--err) !important; border-color: var(--err) !important; color: #fff !important; }
+body.nkotov-admin .btn-warning { background: var(--warn) !important; border-color: var(--warn) !important; color: #fff !important; }
+body.nkotov-admin .btn-info    { background: var(--info) !important; border-color: var(--info) !important; color: #fff !important; }
+
+/* ── ALERTS ── */
+body.nkotov-admin .alert-info    { background: rgba(90,127,166,.12)  !important; border-color: rgba(90,127,166,.4)  !important; color: var(--info)  !important; }
+body.nkotov-admin .alert-success { background: rgba(79,154,106,.12)  !important; border-color: rgba(79,154,106,.4)  !important; color: var(--ok)    !important; }
+body.nkotov-admin .alert-warning { background: rgba(201,161,75,.12)  !important; border-color: rgba(201,161,75,.4)  !important; color: var(--warn)  !important; }
+body.nkotov-admin .alert-danger  { background: rgba(194,86,58,.12)   !important; border-color: rgba(194,86,58,.4)   !important; color: var(--err)   !important; }
+
+/* ── PAGINATION ── */
+body.nkotov-admin .pagination > li > a,
+body.nkotov-admin .pagination > li > span {
+  background: var(--bg-1) !important;
+  border-color: var(--line) !important;
+  color: var(--ink-1) !important;
+}
+body.nkotov-admin .pagination > li > a:hover { background: var(--bg-2) !important; color: var(--ink) !important; }
+body.nkotov-admin .pagination > .active > a,
+body.nkotov-admin .pagination > .active > span {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+body.nkotov-admin .pagination > .disabled > a,
+body.nkotov-admin .pagination > .disabled > span { color: var(--ink-3) !important; background: var(--bg) !important; }
+
+/* ── DROPDOWNS ── */
+body.nkotov-admin .dropdown-menu {
+  background: #1a1a1a !important;
+  border: 1px solid #000 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5) !important;
+}
+body.nkotov-admin .dropdown-menu > li > a { color: rgba(255,255,255,.78) !important; }
+body.nkotov-admin .dropdown-menu > li > a:hover { background: rgba(255,255,255,.08) !important; color: #fff !important; }
+body.nkotov-admin .dropdown-menu > .divider { background: rgba(255,255,255,.08) !important; }
+body.nkotov-admin .dropdown-menu > li.active > a { background: var(--accent) !important; color: #fff !important; }
+
+/* ── MODALS ── */
+body.nkotov-admin .modal-content { background: var(--bg-1) !important; border-color: var(--line) !important; }
+body.nkotov-admin .modal-header { background: var(--bg-2) !important; border-color: var(--line) !important; }
+body.nkotov-admin .modal-footer { background: var(--bg-2) !important; border-color: var(--line) !important; }
+body.nkotov-admin .modal-title { color: var(--ink) !important; }
+
+/* ── BREADCRUMB ── */
+body.nkotov-admin .breadcrumb { background: transparent !important; margin-bottom: 10px !important; }
+body.nkotov-admin .breadcrumb > li,
+body.nkotov-admin .breadcrumb > li a { color: var(--ink-2) !important; }
+body.nkotov-admin .breadcrumb > .active { color: var(--ink-3) !important; }
+body.nkotov-admin .breadcrumb > li + li::before { color: var(--ink-3) !important; }
+
+/* ── LIST GROUPS ── */
+body.nkotov-admin .list-group-item {
+  background: var(--bg-1) !important;
+  border-color: var(--line) !important;
+  color: var(--ink-1) !important;
+}
+body.nkotov-admin .list-group-item:hover { background: var(--bg-2) !important; }
+body.nkotov-admin .list-group-item.active { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+
+/* ── MISC ── */
+body.nkotov-admin hr { border-color: var(--line) !important; }
+body.nkotov-admin .text-muted { color: var(--ink-2) !important; }
+body.nkotov-admin .close { color: var(--ink-2) !important; opacity: 1 !important; }
+body.nkotov-admin .close:hover { color: var(--ink) !important; }
+body.nkotov-admin pre, body.nkotov-admin code {
+  background: var(--bg-2) !important;
+  border-color: var(--line) !important;
+  color: var(--accent) !important;
+}
+body.nkotov-admin .selectize-control .selectize-input {
+  background: var(--bg-2) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .selectize-dropdown {
+  background: var(--bg-1) !important;
+  border-color: var(--line) !important;
+}
+body.nkotov-admin .selectize-dropdown .option { color: var(--ink-1) !important; }
+body.nkotov-admin .selectize-dropdown .option:hover,
+body.nkotov-admin .selectize-dropdown .active { background: var(--hover) !important; color: var(--ink) !important; }
+
+/* Date picker */
+body.nkotov-admin .datepicker table tr td,
+body.nkotov-admin .datepicker table tr th {
+  background: var(--bg-1) !important;
+  color: var(--ink) !important;
+}
+body.nkotov-admin .datepicker table tr td.active,
+body.nkotov-admin .datepicker table tr td.active:hover { background: var(--accent) !important; color: #fff !important; }
+body.nkotov-admin .datepicker { background: var(--bg-1) !important; border-color: var(--line) !important; }
+
+/* Inline calendar icon buttons */
+body.nkotov-admin .input-group-addon .glyphicon { color: var(--ink-2) !important; }
