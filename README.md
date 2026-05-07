@@ -2,6 +2,20 @@
 
 A clean, modern admin theme for WHMCS 8.x / 9.x with dark and light modes, a blue accent colour, live IntelliSearch, and a fully self-contained file set.
 
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://github.com/rorry47/DLX_admin_theme_whmcs/blob/main/scrn_1.jpg"width="100%">
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://github.com/rorry47/DLX_admin_theme_whmcs/blob/main/scrn_2.jpg" width="100%">
+    </td>
+    <td style="width: 33%; text-align: center;">
+      <img src="https://github.com/rorry47/DLX_admin_theme_whmcs/blob/main/scrn_3.jpg" width="100%">
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## Preview
