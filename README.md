@@ -243,4 +243,4 @@ Enable it under **Setup → General Settings → Other → IntelliSearch Enabled
 ---
 ## License
 
-This theme is provided as-is for personal and commercial use on a single WHMCS installation. Redistribution or resale is not permitted without written permission.
+MIT
